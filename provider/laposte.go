@@ -11,22 +11,40 @@ type LaPosteRequest struct {
 	url url.URL
 }
 
-func (r * LaPosteRequest) Build() {
-	r.url.Scheme = "https"
-	r.url.Host = "api.laposte.fr"
-	r.url.Path = "/suivi/v2/idships/"
+type LaPosteRequestBuilder struct {
+	packageId string
+	lang string
+	request *LaPosteRequest
 }
 
-func (r *LaPosteRequest) AddToken(t string) {
-	r.token = t
+func NewLaPosteRequestBuilder() *LaPosteRequestBuilder {
+	return &LaPosteRequestBuilder{request: &LaPosteRequest{}}
 }
 
-func (r *LaPosteRequest) AddPackageId(packageId string) {
-	r.url.Path += url.QueryEscape(packageId)
+func (builder *LaPosteRequestBuilder) AddToken(t string) *LaPosteRequestBuilder {
+	builder.request.token = t
+	return builder
 }
 
-func (r *LaPosteRequest) AddLanguage(language string) {
-	r.url.RawQuery += url.QueryEscape(language)
+func (builder *LaPosteRequestBuilder) AddPackageId(packageId string) *LaPosteRequestBuilder {
+	builder.packageId = packageId
+	return builder
+}
+
+func (builder *LaPosteRequestBuilder) AddLanguage(lang string) *LaPosteRequestBuilder {
+	builder.lang = lang
+	return builder
+}
+
+func (builder *LaPosteRequestBuilder) Build() *LaPosteRequest {
+	builder.request.url.Scheme = "https"
+	builder.request.url.Host = "api.laposte.fr"
+	builder.request.url.Path = "/suivi/v2/idships/"
+
+	builder.request.url.Path = url.QueryEscape(builder.packageId)
+	builder.request.url.RawQuery += url.QueryEscape(builder.lang)
+
+	return builder.request
 }
 
 func (r LaPosteRequest) String() (string) {

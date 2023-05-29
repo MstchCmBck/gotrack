@@ -10,10 +10,10 @@ const (
 )
 
 func main() {
-	request := provider.LaPosteRequest{}
-	request.AddToken(token)
-	request.AddPackageId("LU680211095FR")
-	request.AddLanguage("fr_FR")
-	request.Build()
+	request := provider.NewLaPosteRequestBuilder().AddToken(token).
+		AddPackageId("LU680211095FR").
+		AddLanguage("fr_FR").
+		Build()
+
 	fmt.Println(request)
 }

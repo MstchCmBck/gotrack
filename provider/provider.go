@@ -1,7 +1,6 @@
 package provider
 
 type Provider interface {
-	ProviderBuilder
 	Send()
 	Result()
 }
