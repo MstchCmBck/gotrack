@@ -11,8 +11,6 @@ type Args struct {
 }
 
 func (a *Args) Parse(args []string) {
-	fmt.Println(args)
-
 	// Define command-line flags
 	tracker := flag.String("p", "", "Tracker")
 	packageId := flag.String("i", "", "Package ID")

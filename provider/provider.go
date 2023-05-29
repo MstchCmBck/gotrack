@@ -6,8 +6,7 @@ import (
 )
 
 type Request interface {
-	Send() ([]byte, error)
-	Result()
+	GetResult() []string
 }
 
 type newRequestBuilderFunc func() *requestBuilder
@@ -23,6 +22,7 @@ type requestBuilderFunc func() requestBuilder
 
 func NewRequest(provider, packageId string) Request {
 	lang, _ := language.Get()
+	lang = "fr_FR"
 
 	var request Request
 	config := json.Parse()
