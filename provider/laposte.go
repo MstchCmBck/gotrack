@@ -4,6 +4,7 @@ import (
 	"net/url"
 	"io/ioutil"
 	"net/http"
+	"github.com/mstch/gotrack/utils"
 )
 
 type LaPosteRequest struct {
@@ -54,7 +55,7 @@ func (r LaPosteRequest) String() (string) {
 func (r *LaPosteRequest) Send() ([]byte, error) {
 	req, err := http.NewRequest(http.MethodGet, r.url.String(), nil)
 	if err != nil {
-		// logger.Error("creation of GET request failed.")
+		logger.Error("creation of GET request failed.")
 		return nil, err
 	}
 	req.Header.Set("Accept", "application/json")
@@ -63,13 +64,13 @@ func (r *LaPosteRequest) Send() ([]byte, error) {
 	client := &http.Client{}
 	resp, err := client.Do(req)
 	if err != nil {
-		// logger.Error("request failed")
+		logger.Error("request failed")
 		return nil, err
 	}
 
 	data, err := ioutil.ReadAll(resp.Body)
 	if err != nil {
-		// logger.Error("ioutil.Readall fail")
+		logger.Error("ioutil.Readall fail")
 		return nil, err
 	}
 
