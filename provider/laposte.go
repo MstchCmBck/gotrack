@@ -12,32 +12,32 @@ type LaPosteRequest struct {
 	url url.URL
 }
 
-type LaPosteRequestBuilder struct {
+type laPosteRequestBuilder struct {
 	packageId string
 	lang string
 	request *LaPosteRequest
 }
 
-func NewLaPosteRequestBuilder() *LaPosteRequestBuilder {
-	return &LaPosteRequestBuilder{request: &LaPosteRequest{}}
+func newLaPosteRequestBuilder() *laPosteRequestBuilder {
+	return &laPosteRequestBuilder{request: &LaPosteRequest{}}
 }
 
-func (builder *LaPosteRequestBuilder) AddToken(t string) *LaPosteRequestBuilder {
+func (builder *laPosteRequestBuilder) addToken(t string) *laPosteRequestBuilder {
 	builder.request.token = t
 	return builder
 }
 
-func (builder *LaPosteRequestBuilder) AddPackageId(packageId string) *LaPosteRequestBuilder {
+func (builder *laPosteRequestBuilder) addPackageId(packageId string) *laPosteRequestBuilder {
 	builder.packageId = packageId
 	return builder
 }
 
-func (builder *LaPosteRequestBuilder) AddLanguage(lang string) *LaPosteRequestBuilder {
+func (builder *laPosteRequestBuilder) addLanguage(lang string) *laPosteRequestBuilder {
 	builder.lang = lang
 	return builder
 }
 
-func (builder *LaPosteRequestBuilder) Build() *LaPosteRequest {
+func (builder *laPosteRequestBuilder) build() *LaPosteRequest {
 	builder.request.url.Scheme = "https"
 	builder.request.url.Host = "api.laposte.fr"
 	builder.request.url.Path = "/suivi/v2/idships/"
@@ -75,4 +75,8 @@ func (r *LaPosteRequest) Send() ([]byte, error) {
 	}
 
 	return data, nil
+}
+
+func (r LaPosteRequest) Result() {
+
 }
