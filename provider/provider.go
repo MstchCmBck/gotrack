@@ -4,12 +4,12 @@ import (
 	"github.com/mstch/gotrack/utils/language"
 )
 
-type Provider interface {
+type Request interface {
 	Send() ([]byte, error)
 	Result()
 }
 
-type providerBuilder interface {
+type requestBuilder interface {
 	addToken()
 	addPackageId()
 	addLanguage()
@@ -21,10 +21,10 @@ const (
 	token = "TuJRyLm1pYNrM+p+9rNLd4/ZeIpYpAD4Abma3ot2g0llimorjYNfF338D4grlAWy"
 )
 
-func NewRequest(provider, packageId string) Provider {
+func NewRequest(provider, packageId string) Request {
 	lang, _ := language.Get()
 
-	var request Provider
+	var request Request
 	if (provider == "laposte") {
 
 		request = newLaPosteRequestBuilder().addToken(token).
