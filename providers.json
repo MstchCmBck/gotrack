@@ -1,0 +1,16 @@
+{
+  "providers": [
+    {
+      "name": "laposte",
+      "apiToken": "TuJRyLm1pYNrM+p+9rNLd4/ZeIpYpAD4Abma3ot2g0llimorjYNfF338D4grlAWy"
+    },
+    {
+      "name": "Provider2",
+      "apiToken": "Token2"
+    },
+    {
+      "name": "Provider3",
+      "apiToken": "Token3"
+    }
+  ]
+}

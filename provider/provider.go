@@ -2,6 +2,7 @@ package provider
 
 import (
 	"github.com/mstch/gotrack/utils/language"
+	"github.com/mstch/gotrack/utils/json"
 )
 
 type Request interface {
@@ -9,29 +10,40 @@ type Request interface {
 	Result()
 }
 
+type newRequestBuilderFunc func() *requestBuilder
+
 type requestBuilder interface {
-	addToken()
-	addPackageId()
-	addLanguage()
-	build()
+	addToken(string) requestBuilder
+	addPackageId(string) requestBuilder
+	addLanguage(string) requestBuilder
+	build() Request
 }
 
-// TODO replace this hard coded value by something store in a config file
-const (
-	token = "TuJRyLm1pYNrM+p+9rNLd4/ZeIpYpAD4Abma3ot2g0llimorjYNfF338D4grlAWy"
-)
+type requestBuilderFunc func() requestBuilder
 
 func NewRequest(provider, packageId string) Request {
 	lang, _ := language.Get()
 
 	var request Request
-	if (provider == "laposte") {
+	config := json.Parse()
+	for _, providerFromConfig := range config.Providers {
+		// Verify if provider from the command line match a provider from the config file
+		if (provider != providerFromConfig.Name) {
+			continue
+		}
 
-		request = newLaPosteRequestBuilder().addToken(token).
+		request = builder(provider)().addToken(providerFromConfig.APIToken).
 			addPackageId(packageId).
 			addLanguage(lang).
 			build()
 	}
 
 	return request
+}
+
+func builder(provider string) requestBuilderFunc {
+	if provider == "laposte" {
+		return newLaPosteRequestBuilder
+	}
+	return nil
 }

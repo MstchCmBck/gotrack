@@ -18,26 +18,26 @@ type laPosteRequestBuilder struct {
 	request *LaPosteRequest
 }
 
-func newLaPosteRequestBuilder() *laPosteRequestBuilder {
+func newLaPosteRequestBuilder() requestBuilder {
 	return &laPosteRequestBuilder{request: &LaPosteRequest{}}
 }
 
-func (builder *laPosteRequestBuilder) addToken(t string) *laPosteRequestBuilder {
+func (builder *laPosteRequestBuilder) addToken(t string) requestBuilder {
 	builder.request.token = t
 	return builder
 }
 
-func (builder *laPosteRequestBuilder) addPackageId(packageId string) *laPosteRequestBuilder {
+func (builder *laPosteRequestBuilder) addPackageId(packageId string) requestBuilder {
 	builder.packageId = packageId
 	return builder
 }
 
-func (builder *laPosteRequestBuilder) addLanguage(lang string) *laPosteRequestBuilder {
+func (builder *laPosteRequestBuilder) addLanguage(lang string) requestBuilder {
 	builder.lang = lang
 	return builder
 }
 
-func (builder *laPosteRequestBuilder) build() *LaPosteRequest {
+func (builder *laPosteRequestBuilder) build() Request {
 	builder.request.url.Scheme = "https"
 	builder.request.url.Host = "api.laposte.fr"
 	builder.request.url.Path = "/suivi/v2/idships/"
