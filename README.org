@@ -1,0 +1,14 @@
+
+* How to
+
+#+BEGIN_SRC shell
+gotrack -p laposte LU680211095FR
+#+END_SRC
+
+* Supported provider
+
+|-------------------+------------+--------------------------------------|
+| Provider          | Identifier | Where to  get the API                |
+|-------------------+------------+--------------------------------------|
+| La Poste (french) | laposte    | https://developer.laposte.fr/my-apps |
+|-------------------+------------+--------------------------------------|
