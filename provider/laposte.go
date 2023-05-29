@@ -4,7 +4,7 @@ import (
 	"net/url"
 	"io/ioutil"
 	"net/http"
-	"github.com/mstch/gotrack/utils"
+	"github.com/mstch/gotrack/utils/logger"
 )
 
 type LaPosteRequest struct {

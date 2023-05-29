@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"github.com/mstch/gotrack/provider"
+	"github.com/mstch/gotrack/utils/language"
 )
 
 const (
@@ -10,9 +11,10 @@ const (
 )
 
 func main() {
+	lang, _ := language.Get()
 	request := provider.NewLaPosteRequestBuilder().AddToken(token).
 		AddPackageId("LU680211095FR").
-		AddLanguage("fr_FR").
+		AddLanguage(lang).
 		Build()
 
 	fmt.Println(request)
