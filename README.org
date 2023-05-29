@@ -7,8 +7,9 @@ gotrack -p laposte LU680211095FR
 
 * Supported provider
 
-|-------------------+------------+--------------------------------------|
-| Provider          | Identifier | Where to  get the API                |
-|-------------------+------------+--------------------------------------|
-| La Poste (french) | laposte    | https://developer.laposte.fr/my-apps |
-|-------------------+------------+--------------------------------------|
+|-------------------+------------+------------------------------------------------------------|
+| Provider          | Identifier | Where to  get the API                                      |
+|-------------------+------------+------------------------------------------------------------|
+| La Poste (french) | laposte    | https://developer.laposte.fr/my-apps                       |
+| UPS               | ups        | [[https://developer.ups.com/api/reference#tag/Tracking_other]] |
+|-------------------+------------+------------------------------------------------------------|

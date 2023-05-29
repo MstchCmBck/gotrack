@@ -45,5 +45,8 @@ func builder(provider string) requestBuilderFunc {
 	if provider == "laposte" {
 		return newLaPosteRequestBuilder
 	}
+	if provider == "ups" {
+		return newUpsRequestBuilder
+	}
 	return nil
 }
